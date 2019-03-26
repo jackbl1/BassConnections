@@ -19,7 +19,7 @@ c = 0
 print("step 3")
 for file in dirs:
     print(dirs[0])
-    df = pd.read_csv(file, delimiter = '|', error_bad_lines=False, engine = 'python')
+    df = pd.read_csv(file, delimiter = '|', error_bad_lines=False, engine = 'python', usecols=['FK_COD_ALUNO', 'NUM_IDADE', 'ID_ZONA_RESIDENCIAL'])
     print("file loaded in memory")
     #df = pd.read_csv('./data/' + file, error_bad_lines=False)
 
