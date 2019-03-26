@@ -23,13 +23,15 @@ for file in dirs:
     print("file loaded in memory")
     #df = pd.read_csv('./data/' + file, error_bad_lines=False)
 
-    for index, row in df.iterrows():
-        if(index%10000 == 0):
-            print("benchmark")
-        #print(row)
-        if(row['FK_COD_ALUNO'] == 118477336627):
-            newDF.loc[c] = [row['FK_COD_ALUNO'], row['NUM_IDADE'], row['ID_ZONA_RESIDENCIAL']]
-            c+=1
+    #for index, row in df.iterrows():
+    #    if(index%10000 == 0):
+    #        print("benchmark")
+    #    #print(row)
+    #    if(row['FK_COD_ALUNO'] == 118477336627):
+    #        newDF.loc[c] = [row['FK_COD_ALUNO'], row['NUM_IDADE'], row['ID_ZONA_RESIDENCIAL']]
+    #        c+=1
+    print(df[df['FK_COD_ALUNO'] == 118477336627])
+    
 
 print("step 4")
 newDF.to_csv('output.csv')
