@@ -25,7 +25,12 @@ student_ids = [118477336627, 116454441392, 121501283064, 122224207840,
 print("step 3")
 for file in dirs:
     print(dirs[0])
-    df = pd.read_csv(file, delimiter = '|', error_bad_lines=False, engine = 'python', usecols=col_names)
+    chunksize = 10 ** 6
+    counter=0
+    for chunk in pd.read_csv(file, delimiter = '|', error_bad_lines=False, engine = 'python', usecols=col_names):
+        counter+=1
+        if (counter % 100) == 0:
+            print(counter)
     end = time.time()
     print("file loaded in memory in", str(end-start), "seconds")
 
