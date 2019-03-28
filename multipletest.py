@@ -9,7 +9,7 @@ print("step 1")
 #dirs = os.listdir(path)
 #for file in dirs:
     #print(file)
-dirs = ["C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2012.csv", "C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2013.csv", "C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2014.csv", "C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2015.csv", "C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2016.csv"]
+dirs = ["/Users/alexisangel/Desktop/MATRICULA_SUDESTE_2012.csv"]
 
 print("step 2")
 #df = pd.read_csv('MATRICULA_CO.csv')
@@ -36,12 +36,12 @@ for file in dirs:
     #        c+=
 
     print("step 4")
-    df_with_index = df.set_index(['FK_COD_ALUNO'])
+    #df_with_index = df.set_index(['FK_COD_ALUNO'])
     print("step 5")
-    #print(df[df['FK_COD_ALUNO'] == 118477336627])
     for id in student_ids:
         print(c)
-        newDF.loc[c] = df_with_index.loc[id]
+        print(df[df['FK_COD_ALUNO'] == 118477336627])
+        #newDF.loc[c] = df_with_index.loc[id]
         c+=1
 
 
