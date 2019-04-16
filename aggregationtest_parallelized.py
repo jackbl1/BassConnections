@@ -9,7 +9,7 @@ start = time.time()
 #To select only certain data files, alter the 'dirs' variable
 print("step 1")
 
-dirs = ["C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2012.csv", "C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2013.csv", "C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2014.csv"]
+dirs = ["MATRICULA_CO2012.csv", "MATRICULA_CO2013.csv", "MATRICULA_CO2014.csv"]
 #dirs = ["C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2012_TRIM.csv", "C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2013_TRIM.csv", "C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2014_TRIM.csv"]
     #"C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2015_TRIM.csv", "C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2016_TRIM.csv"]
 #dirs = ["C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2012s.csv", "C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2013s.csv"]
@@ -28,10 +28,10 @@ num_cols = 1
 year = 2012
 current_row = 0
 #Parallelizes the directory loop into interations
-dirs = string(os.environ['SLURM_ARRAY_TASK_ID'])
+i = int(os.environ['SLURM_ARRAY_TASK_ID'])
 #for file in dirs:
-    print(file)
-    df = pd.read_csv(file, error_bad_lines=False, delimiter='|', engine = 'python', usecols=col_names)
+    print(dirs[i])
+    df = pd.read_csv(dirs[i], error_bad_lines=False, delimiter='|', engine = 'python', usecols=col_names)
 
     for col in col_names:
         newDF.insert(num_cols, str(col) + '_' + str(year), None)
