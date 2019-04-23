@@ -9,9 +9,10 @@ start = time.time()
 #To select only certain data files, alter the 'dirs' variable
 print("step 1")
 
-#dirs = ["C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2012_TRIM.csv", "C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2013_TRIM.csv", "C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2014_TRIM.csv",
+#dirs = ["C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2012.csv", "C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2013.csv", "C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2014.csv"]
+dirs = ["C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2012_TRIM.csv", "C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2013_TRIM.csv", "C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2014_TRIM.csv"]
     #"C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2015_TRIM.csv", "C:\\Users\\Jack\\bassconnections\\trimmed_data\\MATRICULA_CO2016_TRIM.csv"]
-dirs = ["C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2012s.csv", "C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2013s.csv"]
+#dirs = ["C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2012s.csv", "C:\\Users\\Jack\\bassconnections\\data\\MATRICULA_CO2013s.csv"]
 
 print("step 2")
 col_names = ['FK_COD_ALUNO', 'TP_COR_RACA', 'TP_SEXO', 'FK_COD_MUNICIPIO_END', 'FK_COD_ETAPA_ENSINO', 'PK_COD_TURMA', 'PK_COD_ENTIDADE']
@@ -29,7 +30,7 @@ num_cols = 1
 year = 2012
 current_row = 0
 for file in dirs:
-    print(dirs[0])
+    print(file)
     df = pd.read_csv(file, error_bad_lines=False, engine = 'python', usecols=col_names)
 
     for col in col_names:
@@ -37,13 +38,7 @@ for file in dirs:
         num_cols+=1
 
     for index, row in df.iterrows():
-        #print("index:")
-        #print(index)
-        #print("row")
-        #print(row)
         if(row['FK_COD_ALUNO'] in student_ids):
-            print("loc3:")
-            print(student_ids[row['FK_COD_ALUNO']])
             current_row = student_ids[row['FK_COD_ALUNO']]
             #TODO: replace 'column1' etc. with the correct column names
             newDF.at[current_row, 'TP_COR_RACA' + "_" + str(year)] = row['TP_COR_RACA']
@@ -55,6 +50,7 @@ for file in dirs:
         else:
             current_row = c
             student_ids[row['FK_COD_ALUNO']] = current_row
+            newDF.at[current_row, 'FK_COD_ALUNO'] = row['FK_COD_ALUNO']
             newDF.at[current_row, 'TP_COR_RACA' + "_" + str(year)] = row['TP_COR_RACA']
             newDF.at[current_row, 'TP_SEXO' + "_" + str(year)] = row['TP_SEXO']
             newDF.at[current_row, 'FK_COD_MUNICIPIO_END' + "_" + str(year)] = row['FK_COD_MUNICIPIO_END']
@@ -67,4 +63,5 @@ for file in dirs:
 print("step 6")
 newDF.to_csv('output.csv')
 #print(c)
+
 
